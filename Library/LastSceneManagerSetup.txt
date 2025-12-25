@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/VAT/Scene/VAT.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
