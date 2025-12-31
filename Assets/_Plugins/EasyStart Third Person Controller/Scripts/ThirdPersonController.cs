@@ -1,5 +1,4 @@
 ﻿
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 /*
@@ -45,7 +44,6 @@ public class ThirdPersonController : MonoBehaviour
     Animator animator;
     CharacterController cc;
 
-
     void Start()
     {
         cc = GetComponent<CharacterController>();
@@ -54,8 +52,28 @@ public class ThirdPersonController : MonoBehaviour
         // Message informing the user that they forgot to add an animator
         if (animator == null)
             Debug.LogWarning("Hey buddy, you don't have the Animator component in your player. Without it, the animations won't work.");
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
+    void MouseCheck()
+    {
+        // 按下ESC键，解锁鼠标 (方便你在编辑器里点东西)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+    }
 
     // Update is only being used here to identify keys and trigger animations
     void Update()
@@ -106,6 +124,7 @@ public class ThirdPersonController : MonoBehaviour
 
         HeadHittingDetect();
 
+        MouseCheck();
     }
 
 
